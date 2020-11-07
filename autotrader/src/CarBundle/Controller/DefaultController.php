@@ -14,8 +14,17 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+
+        $cars = [
+            ['make' => 'BMW', 'name' => 'X'],
+            ['make' => 'Citroen', 'name' => 'B'],
+            ['make' => 'Fiat', 'name' => 'XZ'],
+            ['make' => 'Mercedes', 'name' => 'O']
+        ];
         //phpinfo();
-        return $this->render('CarBundle/default/index.html.twig');
+        return $this->render('CarBundle/default/index.html.twig', [
+            'cars' => $cars
+        ]);
     }
     
 }

@@ -1,5 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block title %}
+    {{ parent() }} : Nos Voitures
+{% endblock %}
 
+{% block body %}
+    <h3>Nos offres</h3>
+
+    <table class="table">
+        <tr>
+            <td>Fabricant</td>
+            <td>Nom</td>
+        </tr>
+
+        {% for car in cars %}
+            <tr>
+                <td> {{ car.make }}</td>    
+                <td>{{ car.name}}</td>    
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
