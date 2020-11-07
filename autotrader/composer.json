@@ -5,7 +5,8 @@
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
         "psr-4": {
-            "AppBundle\\": "src/AppBundle"
+            "AppBundle\\": "src/AppBundle",
+            "CarBundle\\": "src/CarBundle"
         },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
@@ -18,17 +19,20 @@
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "incenteev/composer-parameter-handler": "^2.0",
+        "knplabs/knp-menu-bundle": "^2.2",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^5.0.0",
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/polyfill-apcu": "^1.0",
+        "symfony/polyfill-php80": "1.20.0",
         "symfony/swiftmailer-bundle": "^2.6.4",
         "symfony/symfony": "3.4.*",
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "symfony/var-dumper": "3.4.46"
     },
     "scripts": {
         "symfony-scripts": [
@@ -48,7 +52,7 @@
     },
     "config": {
         "platform": {
-            "php": "5.6"
+            "php": "7.3.9"
         },
         "sort-packages": true
     },

@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
+            new CarBundle\CarBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -53,7 +54,8 @@ class AppKernel extends Kernel
         $loader->load(function (ContainerBuilder $container) {
             $container->setParameter('container.autowiring.strict_mode', true);
             $container->setParameter('container.dumper.inline_class_loader', true);
-
+            // A voir si c'est à ce niveau que je l'active
+            //$container->setParameter('container.dumper.inline_factories', true);
             $container->addObjectResource($this);
         });
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
