@@ -10,14 +10,12 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/car/{maVar}")
+     * @Route("/our-cars/", name="offer")
      */
-    public function indexAction($maVar)
+    public function indexAction()
     {
         //phpinfo();
-        return $this->render('CarBundle/default/index.html.twig',[
-            'maVar' => $maVar
-        ]);
+        return $this->render('CarBundle/default/index.html.twig');
     }
     
 }
