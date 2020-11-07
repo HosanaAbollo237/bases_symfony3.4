@@ -1,6 +1,6 @@
 <?php
 
-namespace CarBundle\Tests\Controller;
+namespace CarBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
