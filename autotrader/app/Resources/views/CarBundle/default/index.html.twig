@@ -1,23 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ parent() }} : Nos Voitures
-{% endblock %}
+    {{ parent() }} - Voiture de confiance
+{% endblock title %}
 
 {% block body %}
-    <h3>Nos offres</h3>
 
-    <table class="table">
+<h1>Nos offres</h1>
+
+<table class="table">
+    <tr>
+        <th>Fabricant</th>
+        <th>Nom</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for car in cars %}
         <tr>
-            <td>Fabricant</td>
-            <td>Nom</td>
+            <td>{{ car.make }}</td>
+            <td>{{ car.name }}</td>
+            <td><a href="{{ url('show_car', {id: car.id }) }}">Afficher les details</a></td>
         </tr>
-
-        {% for car in cars %}
-            <tr>
-                <td> {{ car.make }}</td>    
-                <td>{{ car.name}}</td>    
-            </tr>
-        {% endfor %}
-    </table>
-{% endblock %}
+    {% endfor %}
+</table>
+{% endblock body %}
