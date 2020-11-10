@@ -22,16 +22,16 @@ class Car
     private $id;
 
     /**
-     * @var string
+     * @var Model
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="CarBundle\Entity\Make", inversedBy="cars")
      */
-    private $name;
+    private $model;
 
     /**
-     * @var string
+     * @var Make
      *
-     * @ORM\Column(name="make", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="CarBundle\Entity`Make", inversedBy="cars")
      */
     private $make;
 
@@ -154,29 +154,6 @@ class Car
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Car
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 
     /**
      * Set make
