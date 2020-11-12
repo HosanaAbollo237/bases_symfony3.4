@@ -5,8 +5,8 @@
 {% endblock title %}
 
 {% block body %}
-    <h1>{{ car.name }}</h1>
-    <h3>Fabricant: {{ car.make }}</h3>
+    <h1>{{ car.model.name }}</h1>
+    <h3>Fabricant: {{ car.make.name }}</h3>
     <p>Description {{ car.description }}</p>
 
     <table class="table">

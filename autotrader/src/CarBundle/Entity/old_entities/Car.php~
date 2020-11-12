@@ -24,7 +24,7 @@ class Car
     /**
      * @var Model
      *
-     * @ORM\ManyToOne(targetEntity="CarBundle\Entity\Model", inversedBy="cars")
+     * @ORM\ManyToOne(targetEntity="CarBundle\Entity\Make", inversedBy="cars")
      */
     private $model;
 
@@ -178,28 +178,5 @@ class Car
     {
         return $this->make;
     }
-
-    /**
-     * Set model
-     *
-     * @param \CarBundle\Entity\Make $model
-     *
-     * @return Car
-     */
-    public function setModel(\CarBundle\Entity\Make $model = null)
-    {
-        $this->model = $model;
-
-        return $this;
-    }
-
-    /**
-     * Get model
-     *
-     * @return \CarBundle\Entity\Make
-     */
-    public function getModel()
-    {
-        return $this->model;
-    }
 }
+

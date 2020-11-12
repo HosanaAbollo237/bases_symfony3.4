@@ -71,45 +71,5 @@ class Make
     {
         return $this->name;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->cars = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add car
-     *
-     * @param \CarBundle\Entity\Car $car
-     *
-     * @return Make
-     */
-    public function addCar(\CarBundle\Entity\Car $car)
-    {
-        $this->cars[] = $car;
-
-        return $this;
-    }
-
-    /**
-     * Remove car
-     *
-     * @param \CarBundle\Entity\Car $car
-     */
-    public function removeCar(\CarBundle\Entity\Car $car)
-    {
-        $this->cars->removeElement($car);
-    }
-
-    /**
-     * Get cars
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCars()
-    {
-        return $this->cars;
-    }
 }
+

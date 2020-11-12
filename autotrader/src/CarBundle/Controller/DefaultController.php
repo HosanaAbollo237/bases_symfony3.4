@@ -19,7 +19,7 @@ class DefaultController extends Controller
         $carRepository = $this->getDoctrine()->getRepository('CarBundle:Car');
         $cars = $carRepository->findAll();
 
-        dump($cars);
+        //dump($cars);
 
         //phpinfo();
         return $this->render('CarBundle/default/index.html.twig', [
