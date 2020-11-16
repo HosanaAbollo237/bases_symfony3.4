@@ -9,9 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Car controller.
+ * Car controller
  *
- * @Route("car")
+ * @Route("/admin/car")
  */
 class CarController extends Controller
 {
@@ -27,7 +27,7 @@ class CarController extends Controller
 
         $cars = $em->getRepository('CarBundle:Car')->findAll();
 
-        return $this->render('CarBundle/Resources/views/car/index.html.twig', array(
+        return $this->render('car/index.html.twig',array(
             'cars' => $cars,
         ));
     }
@@ -52,7 +52,7 @@ class CarController extends Controller
             return $this->redirectToRoute('car_show', array('id' => $car->getId()));
         }
 
-        return $this->render('CarBundle/Resources/views/car/new.html.twig', array(
+        return $this->render('car/new.html.twig', array(
             'car' => $car,
             'form' => $form->createView(),
         ));
@@ -68,7 +68,7 @@ class CarController extends Controller
     {
         $deleteForm = $this->createDeleteForm($car);
 
-        return $this->render('CarBundle/Resources/views/car/show.html.twig', array(
+        return $this->render('car/show.html.twig', array(
             'car' => $car,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -92,7 +92,7 @@ class CarController extends Controller
             return $this->redirectToRoute('car_edit', array('id' => $car->getId()));
         }
 
-        return $this->render('CarBundle/Resources/views/car/edit.html.twig', array(
+        return $this->render('car/edit.html.twig', array(
             'car' => $car,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
