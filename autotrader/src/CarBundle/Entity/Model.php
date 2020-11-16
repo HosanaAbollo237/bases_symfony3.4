@@ -111,4 +111,13 @@ class Model
     {
         return $this->cars;
     }
+
+    /**
+     * 
+     * 
+     * @return string
+     */
+    public function __toString(){
+        return $this->getName();
+    }
 }
