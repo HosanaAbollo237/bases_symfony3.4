@@ -1,0 +1,12 @@
+{# form_errors.html.twig #}
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+        <ul style="padding:0;margin:0">
+            {% for error in errors %}
+                <p style="margin:0;margin-left:5px;color:red;"> - {{ error.message }}</p>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
