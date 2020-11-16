@@ -1,14 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
+
     {{ parent() }} - Voiture de confiance
+
 {% endblock title %}
 
 {% block body %}
 
 <h1>Nos offres</h1>
 
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<button type="submit" class="btn"> Submit </button>
+{{ form_end(form) }}
+
 <table class="table">
+
     <tr>
         <th>Fabricant</th>
         <th>Nom</th>
@@ -22,5 +30,7 @@
             <td><a href="{{ url('show_car', {id: car.id }) }}">Afficher les details</a></td>
         </tr>
     {% endfor %}
+
 </table>
+
 {% endblock body %}

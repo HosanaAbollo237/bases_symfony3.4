@@ -5,25 +5,26 @@ namespace CarBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
-
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class DefaultController extends Controller
-{
-    
+{   
     /**
      * @Route("/our-cars/", name="offer")
      */
     public function indexAction()
     {
-        // (1) Recupération object doctrine + repo (2) récupération data
         $carRepository = $this->getDoctrine()->getRepository('CarBundle:Car');
         $cars = $carRepository->findCarWithDetails();
 
-        //dump($cars);
+        $form = $this->createFormBuilder()
+        ->setMethod('GET')
+        ->add('search', TextType::class)
+        ->getForm();
 
-        //phpinfo();
         return $this->render('CarBundle/default/index.html.twig', [
-            'cars' => $cars
+            'cars' => $cars,
+            'form' => $form->createView()
         ]);
     }
 
@@ -37,7 +38,7 @@ class DefaultController extends Controller
         $car = $carRepository->findCarWithDetailsById($id);
 
         return $this->render('CarBundle/default/show.html.twig',[
-            'car' => $car
+            'car' => $car,
         ]);
 
     }
