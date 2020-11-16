@@ -1,6 +1,8 @@
 <?php
 
 namespace CarBundle\Repository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * CarRepository
@@ -10,4 +12,26 @@ namespace CarBundle\Repository;
  */
 class CarRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findCarWithDetails(){
+        $qb = $this->createQueryBuilder('c'); // alias car entity
+
+        $qb->select('c, make, model'); // selection cars, make et model
+        $qb->join('c.make', 'make'); // alias fabricant
+        $qb->join('c.model', 'model'); // alias model
+
+        return $qb->getQuery()->getResult(); // resultat
+    }
+
+    public function findCarWithDetailsById($id){
+        $qb = $this->createQueryBuilder('c'); // alias car entity
+
+        $qb->select('c, make, model'); // selection cars, make et model
+        $qb->join('c.make', 'make'); // alias fabricant
+        $qb->join('c.model', 'model'); // alias model
+
+        $qb->where('c.id = :id');// :id correspond au parametre as SQL
+        $qb->setParameter('id', $id); // as SQL 'id' nom du parametre , $id est la bindValue
+        
+        return $qb->getQuery()->getSingleResult();
+    }
 }

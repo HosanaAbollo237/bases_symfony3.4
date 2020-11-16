@@ -17,7 +17,7 @@ class DefaultController extends Controller
     {
         // (1) Recupération object doctrine + repo (2) récupération data
         $carRepository = $this->getDoctrine()->getRepository('CarBundle:Car');
-        $cars = $carRepository->findAll();
+        $cars = $carRepository->findCarWithDetails();
 
         //dump($cars);
 
@@ -34,7 +34,7 @@ class DefaultController extends Controller
      */
     public function showAction($id){
         $carRepository = $this->getDoctrine()->getRepository('CarBundle:Car');
-        $car = $carRepository->find($id);
+        $car = $carRepository->findCarWithDetailsById($id);
 
         return $this->render('CarBundle/default/show.html.twig',[
             'car' => $car
