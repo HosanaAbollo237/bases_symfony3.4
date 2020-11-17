@@ -2,9 +2,13 @@
 
 namespace CarBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class CarType extends AbstractType
 {
@@ -14,13 +18,35 @@ class CarType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('description')
-            ->add('price')
+            ->add('description', TextType::class,[
+                'required' => true
+                ])
+            ->add('price', TextType::class,[
+                'required' => true,
+                'constraints' => [
+                    new NotBlank()
+                ]
+                ])
             ->add('navigation')
-            ->add('year')
-            ->add('model')
-            ->add('make');
-    }/**
+            ->add('year', TextType::class, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank()
+                ]
+            ])
+            ->add('model', EntityType::class, [
+                'required' => true,
+                'class' => 'CarBundle\Entity\Model'
+            ])
+            ->add('make', EntityType::class, [
+                'required' => true,
+                'class' => 'CarBundle\Entity\Make'
+            ]);
+    }
+    
+    
+    
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
