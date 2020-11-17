@@ -64,6 +64,13 @@ li > a {
     background-color: #888888;
 }
 
+.success{
+    background-color: green;
+}
+
+.warning{
+    background-color: red;
+}
 
 
 

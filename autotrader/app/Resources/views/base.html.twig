@@ -25,10 +25,9 @@
             </header>
           {% endblock header %}
             
-
           {% for type, flashes in app.session.flashbag.all %}
             {% for flash in flashes %}
-              <div style="background-color:green"> {{ flash }} </div>
+              <div class={{ type }}> {{ flash }} </div>
             {% endfor %}
           {% endfor %}
 

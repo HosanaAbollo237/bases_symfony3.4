@@ -33,9 +33,13 @@ class CarController extends Controller
         $car = $em->getRepository('CarBundle:Car')->find($id); // instance de l'entité car
 
         $result =  $dataChecker->checkCar($car); // récupération résultat check
-
-        $this->addFlash('success', $result); // envoie du msg flash
-
+        
+        if($result){
+            $this->addFlash('success', "car promoted");
+        }
+        else{
+            $this->addFlash('warning', "car not applicable");
+        }
         return $this->redirectToRoute("car_index");
     }
 
