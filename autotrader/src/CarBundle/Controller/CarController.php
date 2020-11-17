@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManager;
+use CarBundle\Service\DataChecker;
+
 
 /**
  * Car controller
@@ -15,6 +18,28 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CarController extends Controller
 {
+
+    /**
+     * @param $id
+     * promote a car
+     * @Route("/promote/{id}", name="car_promote")
+     */
+    public function promoteAction($id){
+
+        $dataChecker =$this->get('car.data_checker'); // récupérer service
+
+        $em = $this->getDoctrine()->getEntityManager(); // récupérer em
+
+        $car = $em->getRepository('CarBundle:Car')->find($id); // instance de l'entité car
+
+        $result =  $dataChecker->checkCar($car); // récupération résultat check
+
+        $this->addFlash('success', $result); // envoie du msg flash
+
+        return $this->redirectToRoute("car_index");
+    }
+
+
     /**
      * Lists all car entities.
      *
