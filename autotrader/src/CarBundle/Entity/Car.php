@@ -29,6 +29,14 @@ class Car
     private $model;
 
     /**
+     * 
+     * @var boolean
+     * 
+     * @ORM\Column(name="promote", type="boolean")
+     */
+    private $promote;
+
+    /**
      * @var Make
      *
      * @ORM\ManyToOne(targetEntity="CarBundle\Entity\Make", inversedBy="cars")
@@ -63,6 +71,27 @@ class Car
      * @ORM\Column(name="year", type="integer")
      */
       private $year;
+
+
+    /**
+     * Get promote 
+     * 
+     * @return boolean 
+     */
+     public function isPromote(){
+        return $this->promote;
+     }
+
+
+    /**
+     * Set promote
+     * 
+     * @param int promote
+     */
+     public function setPromote($promote){
+        $this->promote = $promote;
+        return $this;
+     }
 
      /**
       * Get price
