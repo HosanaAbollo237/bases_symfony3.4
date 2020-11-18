@@ -22,13 +22,19 @@ class AbcCheckCarsCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $argument = $input->getArgument('argument');
+        //doctrine manager : get('nameOfTheService')
+        // Depuis notre entityManager, il nous faut le carRepo
+        $manager =$this->getContainer()->get('doctrine.orm.entity_manager');
+        // Récupérer l'entité Car
+        $carRepository = $manager->getRepository('CarBundle:Car');
+        // Query tt les cars
+        $cars = $carRepository->findAll();
 
-        if ($input->getOption('option')) {
-            // ...
+        // Iterer pour afficher l'id des cars
+        foreach($cars as $car) {
+            $output->writeln($car->getId());
         }
 
-        $output->writeln('Command result.');
     }
 
 }
