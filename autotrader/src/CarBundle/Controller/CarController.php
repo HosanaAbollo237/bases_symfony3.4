@@ -4,11 +4,14 @@ namespace CarBundle\Controller;
 
 use CarBundle\Entity\Car;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManager;
 use CarBundle\Service\DataChecker;
+
+use CarBundle\Entity\Model;
+use CarBundle\Entity\Make;
+
 
 
 /**
@@ -47,8 +50,7 @@ class CarController extends Controller
     /**
      * Lists all car entities.
      *
-     * @Route("/", name="car_index")
-     * @Method("GET")
+     * @Route("/", methods={"GET"}, name="car_index")
      */
     public function indexAction()
     {
@@ -64,8 +66,7 @@ class CarController extends Controller
     /**
      * Creates a new car entity.
      *
-     * @Route("/new", name="car_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", methods={"GET","POST"}, name="car_new")
      */
     public function newAction(Request $request)
     {
@@ -89,12 +90,15 @@ class CarController extends Controller
 
     /**
      * Finds and displays a car entity.
-     *
-     * @Route("/{id}", name="car_show")
-     * @Method("GET")
+     * @param Car $car
+     * @Route("/{id}", methods={"GET"}, name="car_show")
      */
-    public function showAction(Car $car)
+    public function showAction($id)
     {
+
+        $em = $this->getDoctrine()->getEntityManager(); 
+        $car = $em->getRepository('CarBundle:Car')->find($id);
+
         $deleteForm = $this->createDeleteForm($car);
 
         return $this->render('car/show.html.twig', array(
@@ -106,12 +110,17 @@ class CarController extends Controller
     /**
      * Displays a form to edit an existing car entity.
      *
-     * @Route("/{id}/edit", name="car_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", methods={"GET", "POST"}, name="car_edit")
      */
-    public function editAction(Request $request, Car $car)
+    public function editAction(Request $request, $id)
     {
+
+        $em = $this->getDoctrine()->getEntityManager(); 
+        $car = $em->getRepository('CarBundle:Car')->find($id);
+
         $deleteForm = $this->createDeleteForm($car);
+
+
         $editForm = $this->createForm('CarBundle\Form\CarType', $car);
         $editForm->handleRequest($request);
 
@@ -123,16 +132,16 @@ class CarController extends Controller
 
         return $this->render('car/edit.html.twig', array(
             'car' => $car,
-            'edit_form' => $editForm->createView(),
+            'edit_form' => $editForm->createView(),        
             'delete_form' => $deleteForm->createView(),
+
         ));
     }
 
     /**
      * Deletes a car entity.
      *
-     * @Route("/{id}", name="car_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", methods={"DELETE"}, name="car_delete")
      */
     public function deleteAction(Request $request, Car $car)
     {
