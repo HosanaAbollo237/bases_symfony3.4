@@ -3,14 +3,37 @@
 namespace CarBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Doctrine\ORM\EntityManager;
+use CarBundle\Service\DataChecker;
 
-class AbcCheckCarsCommand extends ContainerAwareCommand
+class AbcCheckCarsCommand extends Command
 {
+
+    /**
+    *@var DataChecker
+    *
+    */
+    protected $carChecker;
+
+    /**
+    *@var EntityManager
+    *
+    */
+    protected $manager; // doctrine entityManager
+
+    public function __construct(Datachecker $carChecker, EntityManager $manager){
+        $this->carChecker = $carChecker;
+        $this->manager = $manager;
+        parent::__construct();
+    }
+
+
     protected function configure()
     {
         $this
@@ -23,13 +46,9 @@ class AbcCheckCarsCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        //doctrine manager : get('nameOfTheService')
-        // Depuis notre entityManager, il nous faut le carRepo
-        $manager =$this->getContainer()->get('doctrine.orm.entity_manager');
-        $dataChecker = $this->getCOntainer()->get('car.data_checker');
-        
+            
         // Récupérer l'entité Car
-        $carRepository = $manager->getRepository('CarBundle:Car');
+        $carRepository = $this->manager->getRepository('CarBundle:Car');
         
         // Query tt les cars
         $cars = $carRepository->findAll();
@@ -43,7 +62,7 @@ class AbcCheckCarsCommand extends ContainerAwareCommand
         $bar->start();
 
         foreach($cars as $car) {
-            $dataChecker->checkCar($car);
+            $this->carChecker->checkCar($car);
             sleep(1); // cheat pour simulation progression
             $bar->advance(); 
         }
