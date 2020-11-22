@@ -27,16 +27,17 @@ class DataCheckerTest extends WebTestCase {
     // Notre methode de test
     // Je veux savoir exactement ce que je veux et ce que cela va retourner
     public function testCheckCarWithRequiredPhotosWillReturnFalse(){
+        
         // dateChecker instance
         $subject = new DataChecker($this->entityManager, true);
 
-        // resulta attendu
+        // resultat attendu
         $expectedResult = false;
 
         $car = $this->getMockBuilder('CarBundle\Entity\Car')->getMock();
 
         $car->expects($this->once())
-            ->method('setPromote')
+            ->method('setPromote') // appel de cette methode une fois
             ->with($expectedResult);
 
             $this->entityManager->expects($this->once())
@@ -45,7 +46,7 @@ class DataCheckerTest extends WebTestCase {
             
                 $this->entityManager->expects($this->once())
                 ->method('flush');
-                
+
         $result = $subject->checkCar($car);
 
         $this->assertEquals($expectedResult, $result);
