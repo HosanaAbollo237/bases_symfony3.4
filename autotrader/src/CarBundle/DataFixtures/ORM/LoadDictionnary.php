@@ -2,10 +2,11 @@
 
 namespace CarBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use CarBundle\Entity\Make;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
 
-class LoadDictionnary implements FixtureInterface {
+class LoadDictionnary extends Fixture {
     
     public function load(ObjectManager $manager){ 
         
@@ -22,5 +23,6 @@ class LoadDictionnary implements FixtureInterface {
         $manager->persist($make);
         $manager->persist($make1);
         $manager->persist($make2); 
+        $manager->flush();
     }
 }

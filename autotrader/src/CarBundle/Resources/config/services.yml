@@ -9,3 +9,7 @@ services:
         arguments: ["@car.data_checker","@doctrine.orm.entity_manager"]
         tags:
             - { name: console.command }
+
+   car.data_fixtures.orm.load_dictionnary:
+        class: CarBundle\DataFixtures\ORM\LoadDictionnary
+        tags: ['doctrine.fixture.orm']
